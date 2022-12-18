@@ -8,7 +8,7 @@ exports.payment = (request, response) => {
   var requestId = partnerCode + new Date().getTime()
   var orderId = requestId
   var orderInfo = "pay with MoMo"
-  var redirectUrl = "http://localhost:3006/complete"
+  var redirectUrl = "https://scan-desktop.netlify.app"
   var ipnUrl = "https://callback.url/notify"
   var requestType = "captureWallet"
   var extraData = "" //pass empty value if your merchant does not have stores
@@ -39,7 +39,6 @@ exports.payment = (request, response) => {
 
   //signature
   const crypto = require("crypto")
-  console.log("assd")
   var signature = crypto
     .createHmac("sha256", secretKey)
     .update(rawSignature)
@@ -60,6 +59,8 @@ exports.payment = (request, response) => {
     lang: "en"
   })
 
+  console.log(requestBody)
+
   //Create the HTTPS objects
   const https = require("https")
   const options = {
@@ -78,6 +79,7 @@ exports.payment = (request, response) => {
     res.setEncoding("utf8")
     res.on("data", (body) => {
       // console.log(JSON.parse(body));
+      console.log("body", body)
       response.send(JSON.parse(body).payUrl)
     })
     res.on("end", () => {
