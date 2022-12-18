@@ -1,0 +1,13 @@
+POST http://localhost:5000/email
+Content-Type: application/json
+
+{
+    "recivers": ["phuc.truong2809@hcmut.edu.vn"],
+    "subject": "Test API",
+    "content": "From HCMUT K19 With Luv",
+    "attachments": [{
+            "filename": "NAB.docx",
+            "path": "NAB.docx"
+        }
+    ]
+}
